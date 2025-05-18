@@ -387,55 +387,94 @@ const TrialSection = () => {
     setIsSubmitting(true);
 
     try {
-      const selectedClub = clubs.find(club => club.id === formData.club);
-      const selectedCourse = courseTypes.find(course => course.id === formData.courseType);
+      const selectedClubObj = clubs.find(club => club.id === formData.club);
+      const selectedCourseObj = courseTypes.find(course => course.id === formData.courseType);
 
-      // Envoi du message à l'administrateur
+      // Envoi du message à l'administrateur avec le template générique
       await emailjs.send('gmail_id',
         'contact_id_admin',
         {
           from_name: formData.name,
           from_email: formData.email,
-          to_email: 'rafiachraf91@gmail.com',
           phone: formData.phone,
           birth_date: formData.birthDate,
-          club: selectedClub ? selectedClub.name : formData.club,
-          course_type: selectedCourse ? selectedCourse.name : formData.courseType,
-          trial_date: formData.date,
-          trial_time: formData.time,
-          type_demande: 'Cours d\'essai'
+          club: selectedClubObj ? selectedClubObj.name : formData.club,
+          course_type: selectedCourseObj ? selectedCourseObj.name : formData.courseType,
+          to_email: 'rafiachraf91@gmail.com',
+          type_demande: 'Cours d\'essai',
+          // Champs additionnels pour le template générique
+          subject: 'Nouvelle demande de cours d\'essai',
+          message: `Nouvelle demande de cours d'essai reçue.
+
+Informations du candidat :
+- Nom complet : ${formData.name}
+- Email : ${formData.email}
+- Téléphone : ${formData.phone}
+- Date de naissance : ${formData.birthDate}
+- Club choisi : ${selectedClubObj ? selectedClubObj.name : formData.club}
+- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formData.courseType}
+- Date souhaitée : ${formData.date}
+- Horaire souhaité : ${formData.time}`
         },
         'nDkQJ_atL4fh-A2KP'
       );
       
-      // Envoi de la confirmation au client
+      // Envoi de la confirmation au client avec le template générique
       await emailjs.send('gmail_id',
         'contact_id_user',
         {
           to_name: formData.name,
           to_email: formData.email,
-          club: selectedClub ? selectedClub.name : formData.club,
-          course_type: selectedCourse ? selectedCourse.name : formData.courseType,
-          trial_date: formData.date,
-          trial_time: formData.time
+          subject: 'Confirmation de votre demande de cours d\'essai - Académie de Taekwondo Pluriel',
+          message: `Cher(e) ${formData.name},
+
+Nous avons bien reçu votre demande de cours d'essai et nous vous en remercions.
+
+Récapitulatif de votre réservation :
+- Club choisi : ${selectedClubObj ? selectedClubObj.name : formData.club}
+- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formData.courseType}
+- Date : ${formData.date}
+- Horaire : ${formData.time}
+
+Notre équipe va confirmer votre réservation dans les plus brefs délais.
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel`
         },
         'nDkQJ_atL4fh-A2KP'
       );
 
       setSubmitted(true);
       setIsSubmitting(false);
+
+      const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
       
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        birthDate: '',
-        club: '',
-        date: '',
-        time: '',
-        courseType: ''
-      });
+        try {
+          // Simuler un envoi réussi
+          setTimeout(() => {
+            setSubmitted(true);
+            setIsSubmitting(false);
+            
+            // Reset form
+            setFormData({
+              name: '',
+              email: '',
+              phone: '',
+              birthDate: '',
+              club: '',
+              date: '',
+              time: '',
+              courseType: ''
+            });
+          }, 1000);
+        } catch (error) {
+          console.error('Erreur lors de la soumission:', error);
+          setFormErrors(['Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.']);
+          setIsSubmitting(false);
+        }
+      };
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'email:', error);
       setFormErrors(['Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.']);

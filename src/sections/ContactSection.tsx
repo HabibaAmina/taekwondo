@@ -37,32 +37,46 @@ const ContactSection = () => {
     setStatus({ ...status, submitting: true });
 
     try {
-      // Envoi du message principal à l'administrateur
-      await emailjs.send('gmail_id',
-        'contact_id_admin',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          to_email: 'rafiachraf91@gmail.com',
-          subject: formData.subject,
-          message: formData.message,
-          type_demande: 'Contact',
-          isContact: true
-        },
-        'nDkQJ_atL4fh-A2KP'
-      );
+        // Envoi du message à l'administrateur avec le template générique
+        await emailjs.send('gmail_id',
+          'contact_id_admin',
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            to_email: 'rafiachraf91@gmail.com',
+            type_demande: 'Contact',
+            // Champs additionnels pour le template générique
+            phone: '', // Champ vide pour le contact
+            birth_date: '', // Champ vide pour le contact
+            club: '', // Champ vide pour le contact
+            course_type: '' // Champ vide pour le contact
+          },
+          'nDkQJ_atL4fh-A2KP'
+        );
+        
+        // Envoi de la confirmation au client avec le template générique
+        await emailjs.send('gmail_id',
+          'contact_id_user',
+          {
+            to_name: formData.name,
+            to_email: formData.email,
+            subject: `Re: ${formData.subject}`,
+            message: `Cher(e) ${formData.name},
 
-      // Envoi de la confirmation au client
-      await emailjs.send('gmail_id',
-        'contact_id_user',
-        {
-          to_name: formData.name,
-          to_email: formData.email,
-          subject: formData.subject,
-          message: formData.message
-        },
-        'nDkQJ_atL4fh-A2KP'
-      );
+Nous avons bien reçu votre message et nous vous en remercions.
+
+Notre équipe va traiter votre demande dans les plus brefs délais et vous répondra rapidement.
+
+Rappel de votre message :
+${formData.message}
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel`
+          },
+          'nDkQJ_atL4fh-A2KP'
+        );
 
       setStatus({
         submitting: false,
@@ -78,6 +92,7 @@ const ContactSection = () => {
         message: ''
       });
     } catch (error) {
+      console.error('Failed to send email:', error);
       setStatus({
         submitting: false,
         submitted: true,

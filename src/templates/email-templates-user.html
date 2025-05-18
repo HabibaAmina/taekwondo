@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates d'Email Utilisateur - Académie de Taekwondo Pluriel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        .template {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .variable {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+        pre {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Templates d'Email Utilisateur - Académie de Taekwondo Pluriel</h1>
+
+    <!-- Template Contact -->
+    <div class="template">
+        <h2>Template Contact - Utilisateur</h2>
+        <pre>
+Cher(e) {{to_name}},
+
+Nous avons bien reçu votre message et nous vous en remercions.
+
+Notre équipe va traiter votre demande dans les plus brefs délais et vous répondra rapidement.
+
+Rappel de votre message :
+{{message}}
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel
+        </pre>
+    </div>
+
+    <!-- Template Cours d'Essai -->
+    <div class="template">
+        <h2>Template Cours d'Essai - Utilisateur</h2>
+        <pre>
+Cher(e) {{to_name}},
+
+Nous avons bien reçu votre demande de cours d'essai et nous vous en remercions.
+
+Récapitulatif de votre réservation :
+- Club choisi : {{club}}
+- Type de cours : {{course_type}}
+- Date : {{date}}
+- Horaire : {{time}}
+
+Notre équipe va confirmer votre réservation dans les plus brefs délais.
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel
+        </pre>
+    </div>
+
+    <!-- Template Inscription -->
+    <div class="template">
+        <h2>Template Inscription - Utilisateur</h2>
+        <pre>
+Cher(e) {{to_name}},
+
+Nous avons bien reçu votre demande d'inscription et nous vous en remercions.
+
+Récapitulatif de votre inscription :
+- Club choisi : {{club}}
+- Type de cours : {{course_type}}
+
+Notre équipe va traiter votre demande dans les plus brefs délais et vous recontactera pour finaliser votre inscription.
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel
+        </pre>
+    </div>
+
+    <div class="template">
+        <h2>Variables disponibles</h2>
+        <p>Variables communes :</p>
+        <ul>
+            <li><span class="variable">{{to_name}}</span> - Nom du destinataire</li>
+            <li><span class="variable">{{to_email}}</span> - Email du destinataire</li>
+        </ul>
+
+        <p>Variables spécifiques :</p>
+        <ul>
+            <li><span class="variable">{{message}}</span> - Contenu du message (Contact)</li>
+            <li><span class="variable">{{club}}</span> - Club choisi (Cours d'essai et Inscription)</li>
+            <li><span class="variable">{{course_type}}</span> - Type de cours (Cours d'essai et Inscription)</li>
+            <li><span class="variable">{{date}}</span> - Date souhaitée (Cours d'essai uniquement)</li>
+            <li><span class="variable">{{time}}</span> - Horaire souhaité (Cours d'essai uniquement)</li>
+        </ul>
+    </div>
+</body>
+</html>

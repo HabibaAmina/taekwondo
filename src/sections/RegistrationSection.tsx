@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaUserAlt, FaEnvelope, FaPhone, FaCalendarAlt, FaMapMarkerAlt, FaCheckCircle, FaIdCard, FaFileMedical, FaHome, FaMoneyBillWave } from 'react-icons/fa';
@@ -46,33 +46,56 @@ const RegistrationSection = () => {
       const selectedCourseObj = courseTypes.find(course => course.id === formState.courseType);
       
       try {
-        // Envoi du message à l'administrateur
+        // Envoi du message à l'administrateur avec le template générique
         await emailjs.send('gmail_id',
           'contact_id_admin',
           {
             from_name: `${formState.firstName} ${formState.lastName}`,
             from_email: formState.email,
-            to_email: 'rafiachraf91@gmail.com',
             phone: formState.phone,
             birth_date: formState.birthDate,
             club: selectedClubObj ? selectedClubObj.name : formState.club,
             course_type: selectedCourseObj ? selectedCourseObj.name : formState.courseType,
-            type_demande: 'Inscription'
+            to_email: 'rafiachraf91@gmail.com',
+            type_demande: 'Inscription',
+            // Champs additionnels pour le template générique
+            subject: 'Nouvelle inscription aux cours de Taekwondo',
+            message: `Nouvelle demande d'inscription reçue.
+
+Informations du candidat :
+- Nom complet : ${formState.firstName} ${formState.lastName}
+- Email : ${formState.email}
+- Téléphone : ${formState.phone}
+- Date de naissance : ${formState.birthDate}
+- Club choisi : ${selectedClubObj ? selectedClubObj.name : formState.club}
+- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formState.courseType}`
           },
           'nDkQJ_atL4fh-A2KP'
         );
         
-        // Envoi de la confirmation au client
+        // Envoi de la confirmation au client avec le template générique
         await emailjs.send('gmail_id',
           'contact_id_user',
           {
             to_name: `${formState.firstName} ${formState.lastName}`,
             to_email: formState.email,
-            club: selectedClubObj ? selectedClubObj.name : formState.club,
-            course_type: selectedCourseObj ? selectedCourseObj.name : formState.courseType
+            subject: 'Confirmation de votre inscription - Académie de Taekwondo Pluriel',
+            message: `Cher(e) ${formState.firstName} ${formState.lastName},
+
+Nous avons bien reçu votre demande d'inscription et nous vous en remercions.
+
+Récapitulatif de votre inscription :
+- Club choisi : ${selectedClubObj ? selectedClubObj.name : formState.club}
+- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formState.courseType}
+
+Notre équipe va traiter votre demande dans les plus brefs délais et vous recontactera pour finaliser votre inscription.
+
+Cordialement,
+L'équipe de l'Académie de Taekwondo Pluriel`
           },
           'nDkQJ_atL4fh-A2KP'
         );
+
         
         setSubmitted(true);
       } catch (error) {

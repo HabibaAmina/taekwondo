@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Académie de Taekwondo Pluriel - {{type_demande}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #1a237e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        .footer {
+            background-color: #1a237e;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 0 0 5px 5px;
+        }
+        .info-block {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #1a237e;
+        }
+        .alert {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .status-new {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        .details-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .details-table td:first-child {
+            font-weight: bold;
+            width: 200px;
+        }
+        .order-details {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+        .product-info {
+            flex-grow: 1;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Administration - Nouvelle Demande</h1>
+            <p class="status-new">{{type_demande}}</p>
+        </div>
+
+        <div class="content">
+            <!-- Section pour les messages de contact -->
+            {{#isContact}}
+            <div class="alert">
+                <p><strong>⚠️ Nouvelle demande de contact</strong></p>
+                <p>Un visiteur a envoyé un message via le formulaire de contact. Merci de traiter cette demande dans les plus brefs délais.</p>
+            </div>
+            <div class="info-block">
+                <h2>Détails du message</h2>
+                <table class="details-table">
+                    {{#if from_name}}
+                    <tr>
+                        <td>Expéditeur :</td>
+                        <td>{{from_name}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if from_email}}
+                    <tr>
+                        <td>Email :</td>
+                        <td>{{from_email}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if subject}}
+                    <tr>
+                        <td>Sujet :</td>
+                        <td>{{subject}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if message}}
+                    <tr>
+                        <td>Message :</td>
+                        <td>{{message}}</td>
+                    </tr>
+                    {{/if}}
+                </table>
+            </div>
+            {{/isContact}}
+
+            <!-- Section pour les cours d'essai -->
+            {{#isCoursEssai}}
+            <div class="alert">
+                <p><strong>🎯 Nouvelle demande de cours d'essai</strong></p>
+                <p>Un potentiel nouvel élève souhaite essayer un cours. Cette demande nécessite une réponse rapide pour maintenir l'intérêt du prospect.</p>
+            </div>
+            <div class="info-block">
+                <h2>Demande de cours d'essai</h2>
+                <table class="details-table">
+                    {{#if from_name}}
+                    <tr>
+                        <td>Nom :</td>
+                        <td>{{from_name}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if from_email}}
+                    <tr>
+                        <td>Email :</td>
+                        <td>{{from_email}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if phone}}
+                    <tr>
+                        <td>Téléphone :</td>
+                        <td>{{phone}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if preferred_date}}
+                    <tr>
+                        <td>Date souhaitée :</td>
+                        <td>{{preferred_date}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if age}}
+                    <tr>
+                        <td>Âge :</td>
+                        <td>{{age}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if message}}
+                    <tr>
+                        <td>Message :</td>
+                        <td>{{message}}</td>
+                    </tr>
+                    {{/if}}
+                </table>
+            </div>
+            {{/isCoursEssai}}
+
+            <!-- Section pour les inscriptions -->
+            {{#isInscription}}
+            <div class="alert">
+                <p><strong>🎉 Nouvelle inscription</strong></p>
+                <p>Un nouvel élève souhaite s'inscrire à l'académie. Veuillez vérifier les informations et préparer le dossier d'inscription.</p>
+            </div>
+            <div class="info-block">
+                <h2>Nouvelle inscription</h2>
+                <table class="details-table">
+                    {{#if from_name}}
+                    <tr>
+                        <td>Nom :</td>
+                        <td>{{from_name}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if from_email}}
+                    <tr>
+                        <td>Email :</td>
+                        <td>{{from_email}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if phone}}
+                    <tr>
+                        <td>Téléphone :</td>
+                        <td>{{phone}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if birth_date}}
+                    <tr>
+                        <td>Date de naissance :</td>
+                        <td>{{birth_date}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if subscription_type}}
+                    <tr>
+                        <td>Formule choisie :</td>
+                        <td>{{subscription_type}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if additional_info}}
+                    <tr>
+                        <td>Informations supplémentaires :</td>
+                        <td>{{additional_info}}</td>
+                    </tr>
+                    {{/if}}
+                </table>
+            </div>
+            {{/isInscription}}
+
+            <!-- Section pour les commandes de la boutique -->
+            {{#isShop}}
+            <div class="alert">
+                <p><strong>🛍️ Nouvelle commande de la boutique</strong></p>
+                <p>Une nouvelle commande a été passée dans la boutique en ligne. Veuillez traiter cette commande rapidement pour assurer une bonne expérience client.</p>
+            </div>
+            <div class="info-block">
+                <h2>Détails de la commande #{{order_number}}</h2>
+                <div class="order-details">
+                    {{#each products}}
+                    <div class="product">
+                        <img src="{{this.image}}" alt="{{this.name}}">
+                        <div class="product-info">
+                            <h3>{{this.name}}</h3>
+                            <p>Quantité : {{this.quantity}}</p>
+                            <p>Prix unitaire : {{this.price}}€</p>
+                        </div>
+                    </div>
+                    {{/each}}
+                    
+                    <div class="total">
+                        <p>Total de la commande : {{total}}€</p>
+                    </div>
+                </div>
+
+                <h3>Informations du client :</h3>
+                <table class="details-table">
+                    {{#if from_name}}
+                    <tr>
+                        <td>Nom :</td>
+                        <td>{{from_name}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if pickup_location}}
+                    <tr>
+                        <td>Club de retrait :</td>
+                        <td>{{pickup_location}}</td>
+                    </tr>
+                    {{/if}}
+                    {{#if payment_method}}
+                    <tr>
+                        <td>Mode de paiement :</td>
+                        <td>{{payment_method}}</td>
+                    </tr>
+                    {{/if}}
+                </table>
+            </div>
+            {{/isShop}}
+        </div>
+
+        <div class="footer">
+            <p>© {{current_year}} Académie de Taekwondo Pluriel - Notification administrative</p>
+        </div>
+    </div>
+</body>
+</html>

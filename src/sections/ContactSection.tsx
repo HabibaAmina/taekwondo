@@ -37,43 +37,33 @@ const ContactSection = () => {
     setStatus({ ...status, submitting: true });
 
     try {
-        // Envoi du message à l'administrateur avec le template générique
+        // Envoi du message à l'administrateur avec un template utilisant le rendu conditionnel
         await emailjs.send('gmail_id',
-          'contact_id_admin',
+                'template_admin_unified',
           {
             from_name: formData.name,
             from_email: formData.email,
             subject: formData.subject,
             message: formData.message,
             to_email: 'rafiachraf91@gmail.com',
-            type_demande: 'Contact',
-            // Champs additionnels pour le template générique
-            phone: '', // Champ vide pour le contact
-            birth_date: '', // Champ vide pour le contact
-            club: '', // Champ vide pour le contact
-            course_type: '' // Champ vide pour le contact
+            type_contact: true,
+            type_cours_essai: false,
+            type_inscription: false
           },
           'nDkQJ_atL4fh-A2KP'
         );
         
-        // Envoi de la confirmation au client avec le template générique
+        // Envoi de la confirmation au client avec un template utilisant le rendu conditionnel
         await emailjs.send('gmail_id',
-          'contact_id_user',
+                'template_user_unified',
           {
             to_name: formData.name,
             to_email: formData.email,
             subject: `Re: ${formData.subject}`,
-            message: `Cher(e) ${formData.name},
-
-Nous avons bien reçu votre message et nous vous en remercions.
-
-Notre équipe va traiter votre demande dans les plus brefs délais et vous répondra rapidement.
-
-Rappel de votre message :
-${formData.message}
-
-Cordialement,
-L'équipe de l'Académie de Taekwondo Pluriel`
+            original_message: formData.message,
+            type_contact: true,
+            type_cours_essai: false,
+            type_inscription: false
           },
           'nDkQJ_atL4fh-A2KP'
         );

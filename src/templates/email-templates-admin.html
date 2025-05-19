@@ -38,6 +38,7 @@
 <body>
     <h1>Templates d'Email Admin - Académie de Taekwondo Pluriel</h1>
 
+    {{#if type_contact}}
     <!-- Template Contact -->
     <div class="template">
         <h2>Template Contact - Admin</h2>
@@ -51,7 +52,9 @@ Informations du contact :
 - Message : {{message}}
         </pre>
     </div>
+    {{/if}}
 
+    {{#if type_cours_essai}}
     <!-- Template Cours d'Essai -->
     <div class="template">
         <h2>Template Cours d'Essai - Admin</h2>
@@ -69,7 +72,9 @@ Informations du candidat :
 - Horaire souhaité : {{time}}
         </pre>
     </div>
+    {{/if}}
 
+    {{#if type_inscription}}
     <!-- Template Inscription -->
     <div class="template">
         <h2>Template Inscription - Admin</h2>
@@ -85,6 +90,7 @@ Informations du candidat :
 - Type de cours : {{course_type}}
         </pre>
     </div>
+    {{/if}}
 
     <div class="template">
         <h2>Variables disponibles</h2>

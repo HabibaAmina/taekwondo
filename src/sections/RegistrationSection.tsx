@@ -46,9 +46,9 @@ const RegistrationSection = () => {
       const selectedCourseObj = courseTypes.find(course => course.id === formState.courseType);
       
       try {
-        // Envoi du message à l'administrateur avec le template générique
+        // Envoi du message à l'administrateur avec un template utilisant le rendu conditionnel
         await emailjs.send('gmail_id',
-          'contact_id_admin',
+                'template_admin_unified',
           {
             from_name: `${formState.firstName} ${formState.lastName}`,
             from_email: formState.email,
@@ -57,41 +57,24 @@ const RegistrationSection = () => {
             club: selectedClubObj ? selectedClubObj.name : formState.club,
             course_type: selectedCourseObj ? selectedCourseObj.name : formState.courseType,
             to_email: 'rafiachraf91@gmail.com',
-            type_demande: 'Inscription',
-            // Champs additionnels pour le template générique
-            subject: 'Nouvelle inscription aux cours de Taekwondo',
-            message: `Nouvelle demande d'inscription reçue.
-
-Informations du candidat :
-- Nom complet : ${formState.firstName} ${formState.lastName}
-- Email : ${formState.email}
-- Téléphone : ${formState.phone}
-- Date de naissance : ${formState.birthDate}
-- Club choisi : ${selectedClubObj ? selectedClubObj.name : formState.club}
-- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formState.courseType}`
+            type_inscription: true,
+            type_cours_essai: false,
+            type_contact: false
           },
           'nDkQJ_atL4fh-A2KP'
         );
         
-        // Envoi de la confirmation au client avec le template générique
+        // Envoi de la confirmation au client avec un template utilisant le rendu conditionnel
         await emailjs.send('gmail_id',
-          'contact_id_user',
+                'template_user_unified',
           {
             to_name: `${formState.firstName} ${formState.lastName}`,
             to_email: formState.email,
-            subject: 'Confirmation de votre inscription - Académie de Taekwondo Pluriel',
-            message: `Cher(e) ${formState.firstName} ${formState.lastName},
-
-Nous avons bien reçu votre demande d'inscription et nous vous en remercions.
-
-Récapitulatif de votre inscription :
-- Club choisi : ${selectedClubObj ? selectedClubObj.name : formState.club}
-- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formState.courseType}
-
-Notre équipe va traiter votre demande dans les plus brefs délais et vous recontactera pour finaliser votre inscription.
-
-Cordialement,
-L'équipe de l'Académie de Taekwondo Pluriel`
+            club: selectedClubObj ? selectedClubObj.name : formState.club,
+            course_type: selectedCourseObj ? selectedCourseObj.name : formState.courseType,
+            type_inscription: true,
+            type_cours_essai: false,
+            type_contact: false
           },
           'nDkQJ_atL4fh-A2KP'
         );

@@ -240,14 +240,14 @@ const ShoppingCart = () => {
     try {
       // Envoi du message à l'administrateur
       await emailjs.send('gmail_id',
-        'contact_id_admin',
+                'template_registration_admin',
         { ...commonParams, to_email: 'rafiachraf91@gmail.com' },
         'nDkQJ_atL4fh-A2KP'
       );
       
       // Envoi de la confirmation au client
       await emailjs.send('gmail_id',
-        'contact_id_user',
+                'template_registration_user',
         { ...commonParams, to_name: customerInfo.fullName, to_email: customerInfo.email },
         'nDkQJ_atL4fh-A2KP'
       );

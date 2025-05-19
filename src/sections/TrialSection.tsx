@@ -390,9 +390,9 @@ const TrialSection = () => {
       const selectedClubObj = clubs.find(club => club.id === formData.club);
       const selectedCourseObj = courseTypes.find(course => course.id === formData.courseType);
 
-      // Envoi du message à l'administrateur avec le template générique
+      // Envoi du message à l'administrateur avec un template utilisant le rendu conditionnel
       await emailjs.send('gmail_id',
-        'contact_id_admin',
+                'template_admin_unified',
         {
           from_name: formData.name,
           from_email: formData.email,
@@ -400,46 +400,29 @@ const TrialSection = () => {
           birth_date: formData.birthDate,
           club: selectedClubObj ? selectedClubObj.name : formData.club,
           course_type: selectedCourseObj ? selectedCourseObj.name : formData.courseType,
+          date: formData.date,
+          time: formData.time,
           to_email: 'rafiachraf91@gmail.com',
-          type_demande: 'Cours d\'essai',
-          // Champs additionnels pour le template générique
-          subject: 'Nouvelle demande de cours d\'essai',
-          message: `Nouvelle demande de cours d'essai reçue.
-
-Informations du candidat :
-- Nom complet : ${formData.name}
-- Email : ${formData.email}
-- Téléphone : ${formData.phone}
-- Date de naissance : ${formData.birthDate}
-- Club choisi : ${selectedClubObj ? selectedClubObj.name : formData.club}
-- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formData.courseType}
-- Date souhaitée : ${formData.date}
-- Horaire souhaité : ${formData.time}`
+          type_cours_essai: true,
+          type_inscription: false,
+          type_contact: false
         },
         'nDkQJ_atL4fh-A2KP'
       );
       
-      // Envoi de la confirmation au client avec le template générique
+      // Envoi de la confirmation au client avec un template utilisant le rendu conditionnel
       await emailjs.send('gmail_id',
-        'contact_id_user',
+                'template_user_unified',
         {
           to_name: formData.name,
           to_email: formData.email,
-          subject: 'Confirmation de votre demande de cours d\'essai - Académie de Taekwondo Pluriel',
-          message: `Cher(e) ${formData.name},
-
-Nous avons bien reçu votre demande de cours d'essai et nous vous en remercions.
-
-Récapitulatif de votre réservation :
-- Club choisi : ${selectedClubObj ? selectedClubObj.name : formData.club}
-- Type de cours : ${selectedCourseObj ? selectedCourseObj.name : formData.courseType}
-- Date : ${formData.date}
-- Horaire : ${formData.time}
-
-Notre équipe va confirmer votre réservation dans les plus brefs délais.
-
-Cordialement,
-L'équipe de l'Académie de Taekwondo Pluriel`
+          club: selectedClubObj ? selectedClubObj.name : formData.club,
+          course_type: selectedCourseObj ? selectedCourseObj.name : formData.courseType,
+          date: formData.date,
+          time: formData.time,
+          type_cours_essai: true,
+          type_inscription: false,
+          type_contact: false
         },
         'nDkQJ_atL4fh-A2KP'
       );

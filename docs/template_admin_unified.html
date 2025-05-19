@@ -1,0 +1,34 @@
+<!-- Section commune à tous les types de messages -->
+<h2>Nouvelle demande reçue</h2>
+<p>Nom: {{from_name}}</p>
+<p>Email: {{from_email}}</p>
+
+<!-- Section pour les demandes de contact -->
+{{#type_contact}}
+<h3>Demande de contact</h3>
+<p>Sujet: {{subject}}</p>
+<p>Message:</p>
+<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+  {{{message}}}
+</div>
+{{/type_contact}}
+
+<!-- Section pour les demandes de cours d'essai -->
+{{#type_cours_essai}}
+<h3>Demande de cours d'essai</h3>
+<p>Téléphone: {{phone}}</p>
+<p>Date de naissance: {{birth_date}}</p>
+<p>Club choisi: {{club}}</p>
+<p>Type de cours: {{course_type}}</p>
+<p>Date souhaitée: {{date}}</p>
+<p>Horaire: {{time}}</p>
+{{/type_cours_essai}}
+
+<!-- Section pour les demandes d'inscription -->
+{{#type_inscription}}
+<h3>Demande d'inscription</h3>
+<p>Téléphone: {{phone}}</p>
+<p>Date de naissance: {{birth_date}}</p>
+<p>Club choisi: {{club}}</p>
+<p>Type de cours: {{course_type}}</p>
+{{/type_inscription}}

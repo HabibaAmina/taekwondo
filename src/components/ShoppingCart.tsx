@@ -213,6 +213,14 @@ const ShoppingCart = () => {
 
       // Détails de la commande
       order_total: totalPrice.toFixed(2),
+      total: totalPrice.toFixed(2), // Ajout du total pour le template
+      items: cartItems.map(item => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price.toFixed(2),
+        total: (item.price * item.quantity).toFixed(2),
+        image: item.image || ''
+      })),
       products: cartItems.map(item => ({
         name: item.name,
         quantity: item.quantity,
@@ -233,6 +241,7 @@ const ShoppingCart = () => {
       isTrialClass: false,
       isRegistration: false,
       isShop: true,
+      type_commande: true, // Flag pour activer la section commande dans le template
       order_number: 'N/A', // Placeholder, replace with actual order number if available
       current_year: new Date().getFullYear()
     };
@@ -240,14 +249,14 @@ const ShoppingCart = () => {
     try {
       // Envoi du message à l'administrateur
       await emailjs.send('gmail_id',
-                'template_registration_admin',
+                'template_admin_unified',
         { ...commonParams, to_email: 'rafiachraf91@gmail.com' },
         'nDkQJ_atL4fh-A2KP'
       );
       
       // Envoi de la confirmation au client
       await emailjs.send('gmail_id',
-                'template_registration_user',
+                'template_user_unified',
         { ...commonParams, to_name: customerInfo.fullName, to_email: customerInfo.email },
         'nDkQJ_atL4fh-A2KP'
       );

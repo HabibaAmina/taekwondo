@@ -37,6 +37,20 @@
 <p>Un responsable du club vous contactera prochainement pour finaliser votre inscription et vous communiquer les modalités de paiement.</p>
 {{/type_inscription}}
 
+<!-- Section pour les commandes de la boutique -->
+{{#type_commande}}
+<p>Nous avons bien reçu votre commande et nous vous en remercions.</p>
+<p>Voici le récapitulatif de votre commande :</p>
+<ul>
+  {{#items}}
+  <li>{{quantity}}x {{name}} - {{price}}€</li>
+  {{/items}}
+</ul>
+<p>Total : {{total}}€</p>
+
+<p>Notre équipe va traiter votre commande dans les plus brefs délais.</p>
+{{/type_commande}}
+
 <!-- Section commune de fin -->
 <p>Merci de votre intérêt pour l'Académie de Taekwondo Pluriel.</p>
 <p>Cordialement,<br>L'équipe ATP</p>

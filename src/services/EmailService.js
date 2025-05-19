@@ -4,33 +4,36 @@ class EmailService {
         // Configuration des templates EmailJS
         this.templates = {
             contact: {
-                user: 'template_contact_user', // ID du template contact utilisateur
-                admin: 'template_contact_admin', // ID du template contact admin
+                user: 'template_user_unified', // ID du template unifié utilisateur
+                admin: 'template_admin_unified', // ID du template unifié admin
                 fields: ['from_name', 'from_email', 'subject', 'message'],
                 emailParams: (params) => ({
                     ...params,
                     to_name: params.from_name,
-                    to_email: params.from_email
+                    to_email: params.from_email,
+                    type_contact: true
                 })
             },
             trial: {
-                user: 'template_trial_user', // ID du template cours d'essai utilisateur
-                admin: 'template_trial_admin', // ID du template cours d'essai admin
+                user: 'template_user_unified', // ID du template unifié utilisateur
+                admin: 'template_admin_unified', // ID du template unifié admin
                 fields: ['from_name', 'from_email', 'phone', 'birth_date', 'club', 'course_type', 'date', 'time'],
                 emailParams: (params) => ({
                     ...params,
                     to_name: params.from_name,
-                    to_email: params.from_email
+                    to_email: params.from_email,
+                    type_cours_essai: true
                 })
             },
             registration: {
-                user: 'template_registration_user', // ID du template inscription utilisateur
-                admin: 'template_registration_admin', // ID du template inscription admin
+                user: 'template_user_unified', // ID du template unifié utilisateur
+                admin: 'template_admin_unified', // ID du template unifié admin
                 fields: ['from_name', 'from_email', 'phone', 'birth_date', 'club', 'course_type'],
                 emailParams: (params) => ({
                     ...params,
                     to_name: params.from_name,
-                    to_email: params.from_email
+                    to_email: params.from_email,
+                    type_inscription: true
                 })
             }
         };

@@ -1,0 +1,56 @@
+<!-- Section commune à tous les types de messages -->
+<h2>Confirmation de votre demande</h2>
+<p>Bonjour {{to_name}},</p>
+
+<!-- Section pour les demandes de contact -->
+{{#type_contact}}
+<p>Nous avons bien reçu votre message concernant "{{subject}}".</p>
+<p>Notre équipe va l'examiner et vous répondra dans les plus brefs délais.</p>
+
+<p>Pour rappel, voici votre message :</p>
+<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; background-color: #f9f9f9;">
+  {{{original_message}}}
+</div>
+{{/type_contact}}
+
+<!-- Section pour les demandes de cours d'essai -->
+{{#type_cours_essai}}
+<p>Nous avons bien enregistré votre demande de cours d'essai.</p>
+<p>Voici les détails de votre réservation :</p>
+<ul>
+  <li><strong>Club :</strong> {{club}}</li>
+  <li><strong>Type de cours :</strong> {{course_type}}</li>
+  <li><strong>Date :</strong> {{date}}</li>
+  <li><strong>Horaire :</strong> {{time}}</li>
+</ul>
+<p>Un instructeur vous contactera prochainement pour confirmer votre réservation.</p>
+{{/type_cours_essai}}
+
+<!-- Section pour les demandes d'inscription -->
+{{#type_inscription}}
+<p>Nous avons bien reçu votre demande d'inscription.</p>
+<p>Voici les détails de votre inscription :</p>
+<ul>
+  <li><strong>Club :</strong> {{club}}</li>
+  <li><strong>Type de cours :</strong> {{course_type}}</li>
+</ul>
+<p>Un responsable du club vous contactera prochainement pour finaliser votre inscription et vous communiquer les modalités de paiement.</p>
+{{/type_inscription}}
+
+<!-- Section pour les commandes de la boutique -->
+{{#type_commande}}
+<p>Nous avons bien reçu votre commande et nous vous en remercions.</p>
+<p>Voici le récapitulatif de votre commande :</p>
+<ul>
+  {{#items}}
+  <li>{{quantity}}x {{name}} - {{price}}€</li>
+  {{/items}}
+</ul>
+<p>Total : {{total}}€</p>
+
+<p>Notre équipe va traiter votre commande dans les plus brefs délais.</p>
+{{/type_commande}}
+
+<!-- Section commune de fin -->
+<p>Merci de votre intérêt pour l'Académie de Taekwondo Pluriel.</p>
+<p>Cordialement,<br>L'équipe ATP</p>

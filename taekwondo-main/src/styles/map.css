@@ -1,0 +1,113 @@
+.custom-marker {
+  width: auto;
+  min-width: 60px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  white-space: nowrap;
+  overflow: visible;
+  /* Removed border for cleaner look */
+  border: none;
+}
+
+.marker-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.marker-icon {
+  width: 24px;
+  height: 24px;
+  background: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+  z-index: 2;
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+.marker-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.marker-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(79, 70, 229, 0.2);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.custom-marker:hover .marker-icon {
+  transform: scale(1.2);
+  background: #6366f1;
+}
+
+/* Style de la carte */
+#map {
+  background-color: #1a1a1a;
+}
+
+/* Style des popups Leaflet */
+.leaflet-popup-content-wrapper {
+  background: rgba(26, 26, 26, 0.95);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-tip {
+  background: rgba(26, 26, 26, 0.95);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Style des contrôles de zoom */
+.leaflet-control-zoom {
+  border: none !important;
+  margin: 15px !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: rgba(26, 26, 26, 0.9) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgba(79, 70, 229, 0.9) !important;
+}
+
+@media (max-width: 640px) {
+  .custom-marker {
+    min-width: 80px;
+  }
+}

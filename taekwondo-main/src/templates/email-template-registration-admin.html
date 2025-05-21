@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Inscription - Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        .template {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .variable {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+        pre {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Template Inscription - Admin</h1>
+
+    <div class="template">
+        <h2>Template Inscription - Admin</h2>
+        <pre>
+Nouvelle demande d'inscription reçue.
+
+Informations du candidat :
+- Nom complet : {{from_name}}
+- Email : {{from_email}}
+- Téléphone : {{phone}}
+- Date de naissance : {{birth_date}}
+- Club choisi : {{club}}
+- Type de cours : {{course_type}}
+        </pre>
+    </div>
+
+    <div class="template">
+        <h2>Variables disponibles</h2>
+        <p>Variables :</p>
+        <ul>
+            <li><span class="variable">{{from_name}}</span> - Nom de l'expéditeur</li>
+            <li><span class="variable">{{from_email}}</span> - Email de l'expéditeur</li>
+            <li><span class="variable">{{phone}}</span> - Téléphone</li>
+            <li><span class="variable">{{birth_date}}</span> - Date de naissance</li>
+            <li><span class="variable">{{club}}</span> - Club choisi</li>
+            <li><span class="variable">{{course_type}}</span> - Type de cours</li>
+        </ul>
+    </div>
+</body>
+</html>
